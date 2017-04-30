@@ -62,9 +62,6 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
 
             top = first_vertical_line.y2
 
-            # Dane pacjentów znajdują się poniżej second_horizontal_line,
-            # pooddzielane liniami poziomymi
-
             table = dict(x1=first_horizontal_line.x1,
                          y1=first_horizontal_line.y2,
                          x2=first_horizontal_line.x2,
