@@ -73,6 +73,7 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
                 BoxQuery(**table)).lines().horizontal()
             vertical_lines = page.inside(
                 BoxQuery(**table)).lines().vertical().all()
+            vertical_lines.sort(key=lambda elem: elem.x1)
 
             debug("VERTICAL LINES", "\n", "-" * 78)
             for elem in vertical_lines:
@@ -96,7 +97,7 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
 
                 previous_vertical_line = first_vertical_line
                 for current_vertical_line in vertical_lines:
-                    ta_komorka = dict(
+                    this_cell = dict(
                         x1=previous_vertical_line.x1,
                         y1=previous_horizontal_line.y1,
                         x2=current_vertical_line.x1,
@@ -104,10 +105,10 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
                         fuzzy_border=fuzzy_border
                     )
 
-                    debug("THIS CELL", ta_komorka)
+                    debug("THIS CELL", this_cell)
 
                     value = " ".join([x.text for x in page.inside(
-                        BoxQuery(**ta_komorka)).text()])
+                        BoxQuery(**this_cell)).text()])
                     debug("THIS CELL TEXT [%s]" % value)
                     previous_vertical_line = current_vertical_line
                     row.append(value)
