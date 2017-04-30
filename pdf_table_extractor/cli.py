@@ -2,8 +2,6 @@
 
 from __future__ import print_function
 
-import sys
-
 import click
 
 from .pdf_table_extractor import extract_table_data
@@ -13,18 +11,20 @@ from .pdf_table_extractor import extract_table_data
 @click.option('--verbose', type=int, default=0)
 @click.option('--format', type=str, default="csv")
 @click.argument('input', type=click.File('rb'))
-# @click.argument('output', type=click.File('wb'), default=sys.stdout)
-def main(input, format, verbose):
+@click.argument('output', type=str)
+def main(input, output, format, verbose):
     """This script tries to extract table data from file INPUT
     """
     tables = extract_table_data(input, verbose)
 
     if format == "csv":
         import csv
-        o = csv.writer(sys.stdout)
+        output = open(output, "w")
+        o = csv.writer(output)
         for table in tables:
             for row in table:
                 o.writerow(row)
+        output.close()
 
     elif format == "xls":
         import xlwt
@@ -37,7 +37,9 @@ def main(input, format, verbose):
                 for col_no, col in enumerate(row):
                     sheet.write(row_no, col_no, col)
 
-        book.save(sys.stdtou)
+        output = open(output, "wb")
+        book.save(output)
+        output.close()
 
     else:
         raise click.BadOptionUsage("Unknown format %s" % format)
