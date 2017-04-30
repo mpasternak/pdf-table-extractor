@@ -11,7 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
-    # TODO: put package requirements here
+    'drunken_child_in_the_fog>=0.3.0'
 ]
 
 test_requirements = [
