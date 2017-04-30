@@ -78,9 +78,11 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
                 BoxQuery(**table)).lines().vertical().all()
 
             debug("VERTICAL LINES", "\n", "-" * 78)
-            for elem in vertical_lines: debug(elem)
+            for elem in vertical_lines:
+                debug(elem)
             debug("HORIZONTAL LINES", "\n", "-" * 78)
-            for elem in horizontal_lines: debug(elem)
+            for elem in horizontal_lines:
+                debug(elem)
 
             previous_horizontal_line = horizontal_lines.first()
             for current_horizontal_line in horizontal_lines.all()[1:]:
