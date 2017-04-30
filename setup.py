@@ -15,7 +15,7 @@ requirements = [
 ]
 
 test_requirements = [
-    "xlwt==1.2.3"
+    "xlwt==1.2.0"
 ]
 
 setup(
@@ -54,6 +54,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     extras_require={
-        'xls': ["xlwt==1.2.3"]
+        'xls': ["xlwt==1.2.0"]
     }
 )
