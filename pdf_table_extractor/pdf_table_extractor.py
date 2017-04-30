@@ -7,6 +7,7 @@ from drunken_child_in_the_fog.core import DrunkenChildInTheFog, \
 
 
 def print_debug(*args, **kw):
+    """Output debug information"""
     print(*args, **kw)
 
 
@@ -15,6 +16,17 @@ def dont_debug(*args, **kw):
 
 
 def extract_table_data(input, verbose=0, fuzzy_border=0.5):
+    """
+    :param input: input document
+    :type input: :class:`drunken_child_in_the_fog.core.DrunkenChildInTheFog`
+    :param verbose: will spew out a lot of debugging information if 1
+    :param fuzzy_border: borders usuallly aren't ideal; this parameter 
+        describes a range which will be used when looking for horizontal and 
+        vertical lines, and text. 
+    :type fuzzy_border: float
+    :return: a list containing tables. Each table is a list of rows. Each 
+        row is a list of strings. 
+    """
     global debug, print_debug, dont_debug
 
     debug = print_debug
