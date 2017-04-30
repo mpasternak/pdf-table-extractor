@@ -15,7 +15,7 @@ requirements = [
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    "xlwt==1.2.3"
 ]
 
 setup(
@@ -30,7 +30,7 @@ setup(
         'pdf_table_extractor',
     ],
     package_dir={'pdf_table_extractor':
-                 'pdf_table_extractor'},
+                     'pdf_table_extractor'},
     entry_points={
         'console_scripts': [
             'pdf_table_extractor=pdf_table_extractor.cli:main'
@@ -52,5 +52,8 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     test_suite='tests',
-    tests_require=test_requirements
+    tests_require=test_requirements,
+    extras_require={
+        'xls': ["xlwt==1.2.3"]
+    }
 )
