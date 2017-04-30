@@ -13,8 +13,10 @@ To install PDF Table Extractor, run this command in your terminal:
 .. code-block:: console
 
     $ pip install pdf_table_extractor
+    $ # to install with XLS file support
+    $ pip install pdf_table_extractor[xls]
 
-This is the preferred method to install PDF Table Extractor, as it will always install the most recent stable release. 
+This is the preferred method to install PDF Table Extractor, as it will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -32,13 +34,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/mpasternak/pdf_table_extractor
+    $ git clone git://github.com/mpasternak/pdf-table-extractor
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/mpasternak/pdf_table_extractor/tarball/master
+    $ curl  -OL https://github.com/mpasternak/pdf-table-extractor/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +49,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/mpasternak/pdf_table_extractor
-.. _tarball: https://github.com/mpasternak/pdf_table_extractor/tarball/master
+.. _Github repo: https://github.com/mpasternak/pdf-table-extractor
+.. _tarball: https://github.com/mpasternak/pdf-table-extractor/tarball/master
