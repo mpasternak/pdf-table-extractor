@@ -41,9 +41,17 @@ def test_pdf_table_extractor(test_pdf):
 
 def test_command_line_interface(test_path):
     runner = CliRunner()
-    result = runner.invoke(cli.main, [os.path.join(test_path, "test.pdf"), ])
-    assert result.exit_code == 0
-    assert 'multiple rows in table' in result.output
+    input_path = os.path.join(test_path, "test.pdf")
+    with runner.isolated_filesystem():
+        result = runner.invoke(cli.main, [input_path, "output.csv"])
+        assert result.exit_code == 0
+        assert 'multiple rows in table' in open("output.csv", "r").read()
+
+    with runner.isolated_filesystem():
+        result = runner.invoke(cli.main, [input_path, "output.xls",
+                                          "--format=xls"])
+        assert result.exit_code == 0
+
     help_result = runner.invoke(cli.main, ['--help'])
     assert help_result.exit_code == 0
     assert 'Show this message and exit.' in help_result.output
