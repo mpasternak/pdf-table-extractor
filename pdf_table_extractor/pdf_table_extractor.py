@@ -15,7 +15,8 @@ def dont_debug(*args, **kw):
     pass
 
 
-def extract_table_data(input, verbose=0, fuzzy_border=0.5):
+def extract_table_data(input, verbose=0, fuzzy_border=0.5,
+                       cell_text_query="starts_inside"):
     """
     :param input: input document
     :type input: :class:`drunken_child_in_the_fog.core.DrunkenChildInTheFog`
@@ -24,6 +25,9 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
         describes a range which will be used when looking for horizontal and 
         vertical lines, and text. 
     :type fuzzy_border: float
+    :param cell_text_query: :class:`drunken_child_in_the_fog.core.BoxQuery` 
+        parameter, used when looking for text inside cell table. See  
+        :class:`drunken_child_in_the_fog.core.BoxQuery` docs for details
     :return: a list containing tables. Each table is a list of rows. Each 
         row is a list of strings. 
     """
@@ -120,7 +124,7 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5):
                     debug("THIS CELL", this_cell)
 
                     value = " ".join([x.text for x in page.inside(
-                        BoxQuery(**this_cell)).text()])
+                        BoxQuery(**this_cell), cell_text_query).text()])
                     debug("THIS CELL TEXT [%s]" % value)
                     previous_vertical_line = current_vertical_line
                     row.append(value)
