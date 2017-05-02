@@ -21,10 +21,14 @@ deploy:
     condition: $TOXENV == py27
     repo: mpasternak/pdf-table-extractor
     tags: true
-env:
-- TOXENV=py36
-- TOXENV=py27
-install: pip install -U tox
+
+install:
+  - pip install -U tox
+  - export TOXENV=${TRAVIS_PYTHON_VERSION//./}
+
 language: python
-python: 3.6
-script: tox -e ${TOXENV}
+python:
+  - 3.6
+  - 2.7
+
+script: tox
