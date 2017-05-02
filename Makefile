@@ -48,7 +48,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 
 lint: ## check style with flake8
-	flake8 pdf_table_extractor tests
+	flake8 --select=E pdf_table_extractor tests
 
 test: ## run tests quickly with the default Python
 	py.test
