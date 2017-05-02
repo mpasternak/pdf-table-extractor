@@ -20,7 +20,7 @@ test_requirements = [
 
 setup(
     name='pdf_table_extractor',
-    version='0.1.0',
+    version='0.1.1',
     description="Extract table data from PDFs",
     long_description=readme + '\n\n' + history,
     author="Michał Pasternak",
