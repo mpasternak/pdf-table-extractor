@@ -24,7 +24,7 @@ deploy:
 
 install:
   - pip install -U tox
-  - export TOXENV=${TRAVIS_PYTHON_VERSION//./}
+  - export TOXENV=py${TRAVIS_PYTHON_VERSION//./}
 
 language: python
 python:
