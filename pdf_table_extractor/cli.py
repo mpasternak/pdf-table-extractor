@@ -10,12 +10,13 @@ from .pdf_table_extractor import extract_table_data
 @click.command()
 @click.option('--verbose', type=int, default=0)
 @click.option('--format', type=str, default="csv")
+@click.option('--fuzzy-border', type=float, default="0.5")
 @click.argument('input', type=click.File('rb'))
 @click.argument('output', type=str)
-def main(input, output, format, verbose):
+def main(input, output, format, verbose, fuzzy_border):
     """This script tries to extract table data from file INPUT
     """
-    tables = extract_table_data(input, verbose)
+    tables = extract_table_data(input, verbose, fuzzy_border=fuzzy_border)
 
     if format == "csv":
         import csv
