@@ -16,20 +16,24 @@ def dont_debug(*args, **kw):
 
 
 def extract_table_data(input, verbose=0, fuzzy_border=0.5,
+                       horizontal_fuzziness=1.0,
                        cell_text_query="starts_inside"):
     """
     :param input: input document
     :type input: :class:`drunken_child_in_the_fog.core.DrunkenChildInTheFog`
     :param verbose: will spew out a lot of debugging information if 1
-    :param fuzzy_border: borders usuallly aren't ideal; this parameter 
-        describes a range which will be used when looking for horizontal and 
-        vertical lines, and text. 
+    :param fuzzy_border: borders usuallly aren't ideal; this parameter
+        describes a range which will be used when looking for horizontal and
+        vertical lines, and text.
+    :param horizontal_fuzziness: for even more less-than-ideal borders,
+        this is a margin to which horizontal coordinates of a line will be
+        expanded when looking for table borders. See code.
     :type fuzzy_border: float
-    :param cell_text_query: :class:`drunken_child_in_the_fog.core.BoxQuery` 
-        parameter, used when looking for text inside cell table. See  
+    :param cell_text_query: :class:`drunken_child_in_the_fog.core.BoxQuery`
+        parameter, used when looking for text inside cell table. See
         :class:`drunken_child_in_the_fog.core.BoxQuery` docs for details
-    :return: a list containing tables. Each table is a list of rows. Each 
-        row is a list of strings. 
+    :return: a list containing tables. Each table is a list of rows. Each
+        row is a list of strings.
     """
     global debug, print_debug, dont_debug
 
@@ -78,9 +82,9 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5,
 
             top = first_vertical_line.y2
 
-            table = dict(x1=first_horizontal_line.x1,
+            table = dict(x1=first_horizontal_line.x1 - horizontal_fuzziness,
                          y1=first_horizontal_line.y2,
-                         x2=first_horizontal_line.x2,
+                         x2=first_horizontal_line.x2 + horizontal_fuzziness,
                          y2=first_vertical_line.y2,
                          fuzzy_border=fuzzy_border)
 
@@ -100,7 +104,7 @@ def extract_table_data(input, verbose=0, fuzzy_border=0.5,
 
             previous_horizontal_line = horizontal_lines.first()
             for current_horizontal_line in horizontal_lines.all()[1:]:
-
+                debug("CURRENT HORIZONTAL LINE", current_horizontal_line)
                 row = []
 
                 this_row = dict(
